@@ -8,15 +8,18 @@
 - Puanlama ve en iyi 2 aday önerisi → `docs/asama0/puanlama.md`
 - MKK ve KİK için bilgi talebi taslakları → `pazarlama/taslaklar/izin-talepleri.md` (gönderilmedi)
 
-## Onay bekleyenler (kurucu)
-1. Aday seçimi: EKAP (1.) + KAP (2., MKK onayı şartıyla) / yedek ilan.gov.tr
-2. MKK ve KİK e-posta taslaklarının gönderilmesi (kurucu gönderir)
-3. Apify hesabı açılması (ücretsiz plan) — Aşama 1'de yayın için gerekli
+## 2026-11-10 EKAP testi sonucu
+- EKAP ön yüz kodu, tüm veri API'lerini Cloudflare Turnstile insan doğrulamasıyla koruyor. Kural 3 gereği EKAP Actor'ü **durduruldu**. API'ye hiç istek atılmadı.
+- Apify'daki EKAP rakipleri bu korumayı muhtemelen aşıyor veya bozuk; bizim için yol değil.
 
-## Sonraki adım (onay sonrası)
-- `actors/ekap-ihale-izleyici/` iskeleti: Python + Apify SDK, testler, örnek çıktı, README (TR/EN)
-- Önce Apify sunucusundan robots izinli EKAP ilan sayfasına düz HTTP erişim testi; geçmezse dur, bildir.
+## Onay bekleyenler (kurucu)
+1. MKK (KAP) ve KİK (EKAP resmî veri kanalı) e-postalarını göndermek — `pazarlama/taslaklar/izin-talepleri.md`
+2. Yeni aday araştırması: resmî API'si / açık veri lisansı olan kaynaklar (ör. TCMB EVDS, ilan.gov.tr yeniden test)
+3. Apify hesabı (ücretsiz)
+
+## Sonraki adım
+- Onay gelirse resmî API'li Türk kaynaklarını tara, rakip + lisans tablosu çıkar.
 
 ## Riskler
-- Apify'da Türk kamu verisi talebi çok düşük (rakipler ayda 1–2 kullanıcı). 60. gün ölçütü iddialı.
-- EKAP tarayıcı erişimine 502 veriyor; düz HTTP yolu kırılırsa Actor çalışmaz.
+- Apify'da Türk kamu verisi talebi çok düşük (rakipler ayda 1–2 kullanıcı).
+- İki ana aday (EKAP, KAP) kurum izni olmadan kullanılamıyor.

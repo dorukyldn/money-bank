@@ -5,7 +5,7 @@ Ham veri: `rakip-tablosu.md` (Apify Store API), `../hukuk/kaynaklar.md`.
 
 | Aday | Talep | Rakipsizlik | Erişilebilirlik | Bakım | Puan | Not |
 |---|---|---|---|---|---|---|
-| EKAP ihale izleyici | 4 | 3 | 3 | 3 | **12,0** | 2 rakip: afkdigital (4 toplam / 2 aylık kullanıcı), automatic (2 / 1). İkisinin de yorumu yok. robots izinli. |
+| EKAP ihale izleyici | 4 | 3 | 0 | 3 | **0** (2026-11-10 güncel: Turnstile insan doğrulaması) | 2 rakip: afkdigital (4 toplam / 2 aylık kullanıcı), automatic (2 / 1). İkisinin de yorumu yok. robots izinli. |
 | KAP bildirim izleyici | 4 | 3 | 2 | 3 | **8,0** | Rakip tamgadev (2 / 1, $5/1k bildirim). robots okunamıyor + BIST lisans riski → **hukuki onay şartı**. |
 | ilan.gov.tr | 2 | 5 | 2 | 3 | 6,7 | Rakip yok ama erişim doğrulanamadı. |
 | Yemeksepeti | 3 | 2 | 0 | 4 | **0** | Cloudflare challenge → elendi. Rakip hipersoft 19 / 8. |
