@@ -14,3 +14,15 @@ bu sitelerdeki ilanların açık olup olmadığı doğrudan doğrulanamadı ("do
 Kapanmış ama izlenmeli (aynı ekipler tekrar ilan açabilir):
 - Renesas İstanbul — Staff RF/mmWave EM and PCB Design Engineer (süresi dolmuş): https://jobs.renesas.com/job/staff-rf-mmwave-em-and-pcb-design-engineer-turkey-in-istanbul-turkey-jid-181
 - Analog Devices — Staff RF Design Engineer (29.07.2026 kaldırıldı), RF Design Engineer (26.03.2026 kaldırıldı)
+
+## Güncelleme — Crustdata iş ilanı veritabanı (LinkedIn + Indeed), 2026-11-15
+Sorgu: İstanbul, başlıkta RF/mikrodalga/anten/RFIC/radar/donanım tasarım; 62 sonuç, ~2,1 kredi harcandı.
+
+| Sıra | Pozisyon | Eklendi / Güncellendi | Uyum | Not | Bağlantı |
+|---|---|---|---|---|---|
+| 1 | ADI — Senior Product Engineer – RF | 2026-09-14 / 11-08 | Çok yüksek | 5+ yıl, µWave/mmWave ölçüm, test donanımı, A&D | https://tr.indeed.com/viewjob?jk=b44e9a3569858a94 |
+| 2 | Baykar — RF ve Mikrodalga Sistem Geliştirme | 2026-02-28 / 11-11 | Çok yüksek | Beamformer, 40 GHz, yayın tercih | https://tr.indeed.com/viewjob?jk=e06d7eed2504af6f |
+| 3 | ADI — Principal RF Application Engineer | 2026-10-22 / 11-11 | Yüksek (kıdem zor) | Faz dizisi + anten + demo kart; 10+ yıl, YL ile daha az olabilir | https://tr.indeed.com/viewjob?jk=812287481385bc77 |
+| 4 | EDGE Microwave — Senior Hardware Design Engineer (Pendik) | 2026-08-20 | Yüksek | 5+ yıl, Altium, RF/MW, savunma/havacılık; ilan eski olabilir | https://www.linkedin.com/jobs/view/4453851265 |
+| 5 | Siemens — RF Expert & Test Engineer | 2026-09-24 / 10-27 | Orta | 5+ yıl, test ekipmanı, 5G, FCC/ETSI sertifikasyon | https://tr.indeed.com/viewjob?jk=2786632707bb14a5 |
+| 6 | ADI — Senior RFIC / Staff RFIC Design | 2026-04-24 / 11-02 | Düşük-orta | IC tape-out şart | https://tr.indeed.com/viewjob?jk=f6944a66bda25830 · https://tr.indeed.com/viewjob?jk=7860b1bb7fafdd45 |
