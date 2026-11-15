@@ -29,3 +29,5 @@ Sorgu: İstanbul, başlıkta RF/mikrodalga/anten/RFIC/radar/donanım tasarım; 6
 
 ## Başvuru durumu
 - ADI — Senior Product Engineer – RF: mülakat yapıldı, karar bekleniyor (1–2 aday daha görüşülecek). Kaynak: kurucu, 2026-11-15.
+- Baykar (RF ve Mikrodalga Sistem Geliştirme) ve EDGE Microwave: kurucu kapalı göründüğünü bildirdi (2026-11-15). Listeden çıkarıldı.
+- Son 14 günde eklenen İstanbul RF ilanları (Crustdata): yalnız ADI stajları, ADI Staff RFIC (tape-out şart) ve Baykar 2027 staj. Piyasa şu an dar.
