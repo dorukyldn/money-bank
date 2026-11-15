@@ -29,3 +29,5 @@
 - Connects bakiyesi 0 → teklif verilemiyor. Satın alma yalnız web'den (kurucu).
 - İlk aday ilan: KiCad 9 Mezzanine (380–390 MHz RF alıcı). Engel: 300 MHz–1 GHz arası iki gerçek kart örneği gerekiyor; kurucudan bilgi bekleniyor.
 - Taslaklar: `pazarlama/upwork/`
+- 2026-11-15: Kurucu Connects almak istemiyor → Connects'siz yol: davetler (bedava), Project Catalog ve Fiverr ilanı (web'den, kurucu açar).
+  Profil: müsaitlik "30 saatten az" yapıldı, beceriler 9 → 17. Teklif taslakları Connects gelirse kullanılacak.
