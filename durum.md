@@ -1,6 +1,6 @@
 # Durum (her oturum başında oku, sonunda güncelle)
 
-**Aşama:** 0 — Doğrulama · **Son güncelleme:** 2026-11-10 · **Harcanan sermaye:** 0 $ / 50 $
+**Aşama:** Yön değişikliği — Upwork RF hizmeti (veri işi MKK/KİK yanıtı bekliyor) · **Son güncelleme:** 2026-11-10 · **Harcanan sermaye:** 0 $ / 50 $
 
 ## Bu oturumda yapılanlar
 - 5 adayın robots.txt, kullanım koşulları ve teknik erişimi kontrol edildi → `docs/hukuk/kaynaklar.md`
@@ -23,3 +23,9 @@
 ## Riskler
 - Apify'da Türk kamu verisi talebi çok düşük (rakipler ayda 1–2 kullanıcı).
 - İki ana aday (EKAP, KAP) kurum izni olmadan kullanılamıyor.
+
+## 2026-11-15 Upwork
+- Profil başlığı ve açıklaması güncellendi (kurucu onayıyla). Saatlik ücret 30 $ (kurucu web'den değiştirdi).
+- Connects bakiyesi 0 → teklif verilemiyor. Satın alma yalnız web'den (kurucu).
+- İlk aday ilan: KiCad 9 Mezzanine (380–390 MHz RF alıcı). Engel: 300 MHz–1 GHz arası iki gerçek kart örneği gerekiyor; kurucudan bilgi bekleniyor.
+- Taslaklar: `pazarlama/upwork/`
