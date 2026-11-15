@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Sample RF Design Review — Mesh3310 LoRa Section</title>
+<style>
+@page{size:A4;margin:16mm 15mm}
+body{font-family:"Helvetica Neue",Arial,sans-serif;color:#1d2330;font-size:10.2pt;line-height:1.45}
+h1{font-size:19pt;margin:0 0 2px;color:#0f2a4a}h2{font-size:12.5pt;color:#0f2a4a;border-bottom:1.5px solid #0f2a4a;padding-bottom:3px;margin:18px 0 8px}
+.sub{color:#5a6474;margin-bottom:10px}.meta{display:grid;grid-template-columns:150px 1fr;gap:2px 10px;font-size:9.4pt;margin:8px 0 4px}
+.meta b{color:#3c4656}table{border-collapse:collapse;width:100%;font-size:9.2pt}th,td{border:1px solid #c9cfd8;padding:5px 6px;vertical-align:top;text-align:left}
+th{background:#eef1f5}.sev{font-weight:700;white-space:nowrap}.c{color:#b42318}.r{color:#b54708}.o{color:#2a5db0}.p{color:#1e7d3b}
+.f{border:1px solid #c9cfd8;border-left:4px solid #b54708;padding:7px 10px;margin:8px 0;page-break-inside:avoid}.f.o{border-left-color:#2a5db0}.f.p{border-left-color:#1e7d3b}
+.f h3{margin:0 0 4px;font-size:10.4pt}.f p{margin:3px 0}.k{color:#5a6474;font-size:9pt}.note{font-size:8.6pt;color:#5a6474}code{font-size:9pt}
+</style></head><body>
+<h1>Sample RF Design Review</h1>
+<div class="sub">LoRa (SX1262, 868 MHz) section of the open-source Mesh3310 board — pre-prototype desk review</div>
+<div class="meta">
+<b>Design reviewed</b><span>The-Mesh3310-Project, KiCad 9, “Rev G” (github.com/JLTelectronics/The-Mesh3310-Project, MIT License)</span>
+<b>Scope</b><span>SX1262 TX/RX matching, RF switch, antenna feed and matching, RF line impedance, antenna clearance, 32 MHz crystal</span>
+<b>Method</b><span>Schematic + layout file analysis (pad-level netlist, stackup, track widths, zones), cross-checked against the SX1262 and Johanson 0868AT43A0020E datasheets. No measurements.</span>
+<b>Reviewer</b><span>S. D. Yıldön — RF/Microwave Engineer (HF–40 GHz, 5 IEEE conference papers)</span>
+</div>
+<p class="note">This is an independent portfolio sample prepared from public files. It is not affiliated with or endorsed by the project authors. Calculations marked “estimate” must be confirmed by measurement.</p>
+
+<h2>1. Summary</h2>
+<table><tr><th style="width:90px">Severity</th><th>Finding</th></tr>
+<tr><td class="sev r">Recommended</td><td>F1 — External 10 pF crystal load caps added on top of the SX1262 internal trim caps; likely frequency offset</td></tr>
+<tr><td class="sev r">Recommended</td><td>F2 — Ear-speaker pads and B.Cu tracks inside the chip-antenna clearance area</td></tr>
+<tr><td class="sev r">Recommended</td><td>F3 — Antenna pi-network values must be re-tuned in the final housing (eval-board values do not transfer)</td></tr>
+<tr><td class="sev o">Optional</td><td>F4 — RF lines are ≈53–55 Ω rather than 50 Ω; negligible at these lengths</td></tr>
+<tr><td class="sev o">Optional</td><td>F5 — RF switch control split between SX1262 DIO2 and an MCU GPIO; document the required logic</td></tr>
+<tr><td class="sev p">Good practice</td><td>P1–P4 — 2nd-harmonic trap, tuning placeholders, U.FL variant handling, ground stitching</td></tr></table>
+
+<h2>2. Topology extracted from the layout</h2>
+<p><b>TX:</b> RFO → L15 (0 Ω) → node with PA choke L16 47 nH to VR_PA (decoupled C76/C77) and NC shunt C80 → parallel L17 2.5 nH ∥ C81 3.3 pF → shunt C82 5.6 pF → C83 39 pF (DC block) → L18 4.7 nH → shunt C84 1.8 pF → switch RF2.<br>
+<b>RX:</b> RFI_P / RFI_N with L13 15 nH between them, C75 1.8 pF to GND, C78 2.4 pF to switch RF1, NC shunt C79.<br>
+<b>Antenna:</b> switch RFC → C96 56 pF → node with U.FL RF4 and shunt C87 3.6 pF → L19 8.2 nH → shunt C88 3.6 pF → ANT1.<br>
+<b>Stackup:</b> 4 layers, F.Cu 35 µm / 0.0994 mm 3313 prepreg (εr 4.1) / In1.Cu GND, ENIG.</p>
+
+<h2>3. Findings</h2>
+<div class="f"><h3>F1 — Crystal load capacitance: external caps plus internal trim caps <span class="sev r">Recommended</span></h3>
+<p class="k">Location: X1 (32 MHz, 10 pF load, 10 ppm), C70 / C71 = 10 pF on XTA / XTB, near U10.</p>
+<p><b>Issue:</b> The SX1262 datasheet (§4.1.3) states that no external foot capacitors are required: each of XTA/XTB has an internal programmable capacitor of 11.3–33.4 pF, which the device sets to 19.7 pF in STDBY_XOSC. With the external 10 pF added, each pin sees ≈30 pF by default, i.e. a load of ≈15 pF plus stray versus the crystal's specified 10 pF. Even at the minimum trim setting (11.3 + 10 pF per pin) the load stays above 10 pF.</p>
+<p><b>Impact (estimate):</b> the oscillator runs low by roughly 10–60 ppm depending on the crystal's motional capacitance — about 9–50 kHz at 868 MHz, on top of the ±10 ppm tolerance and temperature drift. This eats into LoRa's frequency-offset margin, especially at narrow bandwidths and high spreading factors.</p>
+<p><b>Fix:</b> Mark C70/C71 as DNP and set the internal trim registers (0x0911/0x0912, after entering STDBY_XOSC) during production calibration; or keep the pads and fit only if measurement shows they are needed. Verify with a frequency counter or spectrum analyzer on a CW carrier.</p></div>
+
+<div class="f"><h3>F2 — Metal and tracks inside the antenna clearance <span class="sev r">Recommended</span></h3>
+<p class="k">Location: antenna keep-out zone (all layers, approx. 23.6 × 9.5 mm at the board top); J10 “Speaker pad” on B.Cu ≈9.6 mm from ANT1, with 10 B.Cu track segments of its two nets inside the zone; mounting hole H6 also inside the zone.</p>
+<p><b>Issue:</b> The keep-out blocks copper pours but allows tracks and footprints. Johanson's recommended configuration requires the ground clearance to be “free of metal below and above”. The earpiece speaker (magnet and metal frame) and its tracks sit inside that area, and the original housing adds the speaker and screw directly above the antenna.</p>
+<p><b>Impact:</b> detuning (shift of the resonant frequency) and lower radiation efficiency; the size depends on the final assembly and can only be quantified by measurement.</p>
+<p><b>Fix:</b> Route the speaker tracks along the board edge outside the clearance where the mechanics allow; keep H6 non-plated or unconnected if possible; and do the antenna tuning (F3) with the speaker, screw and housing installed.</p></div>
+
+<div class="f"><h3>F3 — Antenna matching values need tuning in the final product <span class="sev r">Recommended</span></h3>
+<p class="k">Location: C87 / L19 / C88 pi network at ANT1.</p>
+<p><b>Issue:</b> The design correctly provides a pi (shunt–series–shunt) network, as Johanson recommends. The fitted values (3.6 pF / 8.2 nH / 3.6 pF) differ from Johanson's eval-board values (3.9 pF / 18 nH / 0.3 pF). That is expected — Johanson states the values depend on layout, thickness and material — but the README notes the chip antenna is not yet tuned.</p>
+<p><b>Fix:</b> Measure S11 at the U.FL/antenna node with a VNA (port extension to the node, fixture de-embedded) in the final housing, hand-held and on a table; tune for return loss better than −10 dB across 863–870 MHz; check efficiency in an anechoic or reverberation chamber if available. Record the final values in the BOM.</p></div>
+
+<div class="f o"><h3>F4 — RF line impedance ≈53–55 Ω <span class="sev o">Optional</span></h3>
+<p class="k">Location: all RF nets, 0.14 mm on F.Cu over In1.Cu GND, 0.2 mm pour clearance.</p>
+<p><b>Analysis:</b> Closed-form microstrip with 35 µm copper gives ≈54.7 Ω (≈61 Ω ignoring thickness); the 0.2 mm coplanar gap is ≈2× the dielectric height, so the side grounds lower this only slightly; solder mask lowers it by another 1–2 Ω. Estimated result: ≈53–55 Ω. A 50 Ω line needs ≈0.17–0.20 mm.</p>
+<p><b>Impact:</b> The longest RF run (switch RF1, ≈8.2 mm) is only 0.04 λ at 868 MHz (≈15°), so the mismatch contribution is negligible. Worth correcting only in a future revision or if the design moves to higher bands.</p></div>
+
+<div class="f o"><h3>F5 — RF switch control logic <span class="sev o">Optional</span></h3>
+<p class="k">Location: U1 TPE4259-63; VC1 from SX1262 DIO2 via R45, VC2 from MCU P0.04 via R44, 1 nF filters C85/C86.</p>
+<p><b>Issue:</b> One control comes from the radio (DIO2 switches automatically on TX) and the other from firmware. If the switch needs complementary control, a firmware misconfiguration leaves both paths off or on, with no hardware guard.</p>
+<p><b>Fix:</b> Document the required truth table in the schematic and firmware notes; consider deriving VC2 from DIO2 with an inverter so the switch state cannot depend on firmware.</p></div>
+
+<h2>4. Good practice observed</h2>
+<div class="f p"><h3>P1 — 2nd-harmonic trap</h3><p>L17 2.5 nH ∥ C81 3.3 pF resonates at ≈1.75 GHz, close to 2 × 868 MHz = 1.736 GHz. Suggest confirming the H2 level on a spectrum analyzer against EN 300 220 spurious limits, since 0201 tolerances and pad parasitics can shift the notch by tens of MHz.</p></div>
+<div class="f p"><h3>P2 — Tuning placeholders</h3><p>NC shunt pads C79 (RX) and C80 (TX) allow matching adjustment without a new board spin.</p></div>
+<div class="f p"><h3>P3 — U.FL variant handled correctly</h3><p>With an external antenna on RF4, shunt C87 (−j51 Ω at 868 MHz) would load the 50 Ω path (return loss ≈7 dB, ≈0.9 dB mismatch loss by my calculation). The project's U.FL BOM variant already removes C87 and L19 — consistent with this.</p></div>
+<div class="f p"><h3>P4 — Ground stitching and routing</h3><p>82 GND vias in the RF section, no vias in any RF path, continuous In1.Cu ground under the RF lines.</p></div>
+
+<h2>5. Suggested bring-up measurements</h2>
+<table><tr><th>Measurement</th><th>Purpose</th></tr>
+<tr><td>CW carrier frequency vs. trim register</td><td>Confirms F1 and sets the production trim value</td></tr>
+<tr><td>S11 at the antenna node, in housing</td><td>Tunes the pi network (F2, F3)</td></tr>
+<tr><td>Conducted TX power and harmonics at U.FL (U.FL variant)</td><td>Checks the PA match and the H2 trap (P1)</td></tr>
+<tr><td>RX sensitivity (conducted)</td><td>Checks the RX balun and switch path</td></tr></table>
+<p class="note">Prepared by S. D. Yıldön. Findings are based on the published Rev G files; any later revision may differ.</p>
+</body></html>

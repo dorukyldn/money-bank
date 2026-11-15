@@ -31,3 +31,4 @@
 - Taslaklar: `pazarlama/upwork/`
 - 2026-11-15: Kurucu Connects almak istemiyor → Connects'siz yol: davetler (bedava), Project Catalog ve Fiverr ilanı (web'den, kurucu açar).
   Profil: müsaitlik "30 saatten az" yapıldı, beceriler 9 → 17. Teklif taslakları Connects gelirse kullanılacak.
+- 2026-11-15: Portföy için örnek RF inceleme raporu hazırlandı (Mesh3310, MIT lisanslı açık kaynak) → `pazarlama/upwork/ornek-rapor/RF-Design-Review-Sample.pdf`. Kurucu teknik kontrolü bekliyor. Zamanlanmış sabah kontrolü oturum izni nedeniyle kurulamadı.
