@@ -26,3 +26,6 @@ Sorgu: İstanbul, başlıkta RF/mikrodalga/anten/RFIC/radar/donanım tasarım; 6
 | 4 | EDGE Microwave — Senior Hardware Design Engineer (Pendik) | 2026-08-20 | Yüksek | 5+ yıl, Altium, RF/MW, savunma/havacılık; ilan eski olabilir | https://www.linkedin.com/jobs/view/4453851265 |
 | 5 | Siemens — RF Expert & Test Engineer | 2026-09-24 / 10-27 | Orta | 5+ yıl, test ekipmanı, 5G, FCC/ETSI sertifikasyon | https://tr.indeed.com/viewjob?jk=2786632707bb14a5 |
 | 6 | ADI — Senior RFIC / Staff RFIC Design | 2026-04-24 / 11-02 | Düşük-orta | IC tape-out şart | https://tr.indeed.com/viewjob?jk=f6944a66bda25830 · https://tr.indeed.com/viewjob?jk=7860b1bb7fafdd45 |
+
+## Başvuru durumu
+- ADI — Senior Product Engineer – RF: mülakat yapıldı, karar bekleniyor (1–2 aday daha görüşülecek). Kaynak: kurucu, 2026-11-15.
